@@ -1,0 +1,53 @@
+﻿@model Baltic_Top_Trumps.Models.Deck
+
+<div class="row">
+<div class="card-container col-7">
+    @foreach (var card in Model.Cards)
+    {
+        <div class="card">
+            <a asp-action="SelectCard" asp-route-cardId="@card.ID">
+                <h3>@card.Name</h3>
+                <p>Speed: @card.Speed</p>
+                <p>Power: @card.Power</p>
+                <p>Intelligence: @card.Intelligence</p>
+            </a>
+        </div>
+    }
+</div>
+<div class="selected-card-container col-5">
+    @if (Model.SelectedCards != null)
+    {
+        foreach (var card in Model.SelectedCards)
+        {
+            <div class="card">
+                <h3>@card.Name</h3>
+                <p>Speed: @card.Speed</p>
+                <p>Power: @card.Power</p>
+                <p>Intelligence: @card.Intelligence</p>
+            </div>
+
+            <div class="stat-buttons-container">
+                <button class="generic-button selected-button" tabindex="0" onclick="updateSelectedValue(this.innerHTML)">Speed: @card.Speed</button>
+                <button class="generic-button selected-button" tabindex="0" onclick="updateSelectedValue(this.innerHTML)">Power: @card.Power</button>
+                <button class="generic-button selected-button" tabindex="0" onclick="updateSelectedValue(this.innerHTML)">Intelligence: @card.Intelligence</button>
+            </div>
+
+            <div class="battle-button-container">
+               <form asp-action="Battle">
+                <input type="hidden" id="selectedValue" value="" name="selectedValue" />
+                <button class="generic-button battle-button" type="submit">Battle!</button>
+               </form>
+            </div>
+
+
+        }
+    }
+</div>
+</div>
+
+
+<script>
+  function updateSelectedValue(value) {
+    document.getElementById("selectedValue").value = value;
+  }
+</script>

@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using Baltic_Top_Trumps.Controllers
+@model IEnumerable<Baltic_Top_Trumps.Models.Deck>
+
+@if (Model != null)
+{
+    @foreach (var deck in Model)
+    {
+        <div class="deck">
+            <a href="@Url.Action("Arena", "Deck", new { id = deck.ID })" class="deck-link">
+                <img src ="@deck.ImageUrl" alt="Deck Image" class="deck-image">
+                <div class="deck-name">
+                    @deck.Name
+                </div>
+                <div class="deck-description">
+                    @deck.Description
+                </div>
+            </a>
+        </div>
+    }
+}
+else
+{
+    <p>No decks found</p>
+}
+
